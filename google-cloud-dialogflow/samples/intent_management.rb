@@ -19,8 +19,12 @@ def list_intents project_id:
 
   require "google/cloud/dialogflow"
 
-  intents_client = Google::Cloud::Dialogflow.intents
-  parent = intents_client.class.agent_path project: project_id
+  intents_client = Google::Cloud::Dialogflow.intents do |config|
+    config.credentials = "/Users/munkhbayarg/gcloud-keys/helical-zone-771-8dc4cd9aeb41.json"
+    config.timeout = 60.0
+  end
+
+  parent = intents_client.agent_path project: project_id
 
   intents = intents_client.list_intents parent: parent
 
@@ -54,7 +58,10 @@ def create_intent project_id:, display_name:, message_text:,
 
   require "google/cloud/dialogflow"
 
-  intents_client = Google::Cloud::Dialogflow.intents
+  intents_client = Google::Cloud::Dialogflow.intents do |config|
+    config.credentials = "/Users/munkhbayarg/gcloud-keys/helical-zone-771-8dc4cd9aeb41.json"
+    config.timeout = 60.0
+  end
   parent = intents_client.agent_path project: project_id
 
   intent = {
@@ -79,7 +86,10 @@ def delete_intent project_id:, intent_id:
 
   require "google/cloud/dialogflow"
 
-  intents_client = Google::Cloud::Dialogflow.intents
+  intents_client = Google::Cloud::Dialogflow.intents do |config|
+    config.credentials = "/Users/munkhbayarg/gcloud-keys/helical-zone-771-8dc4cd9aeb41.json"
+    config.timeout = 60.0
+  end
   intent_path = intents_client.intent_path project: project_id,
                                            intent:  intent_id
 
